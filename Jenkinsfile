@@ -1,24 +1,15 @@
-pipeline{
+pipeline {
     agent any
-    stages{
-        stage("Check Out"){
-            steps{
-                echo 'Checking Out'
+
+    stages {
+        stage('Build') {
+            steps {
+               mvn 'clean package'
             }
         }
-         stage("Compile"){
+        stage('Deploy'){
             steps{
-                echo 'Compiling'
-            }
-        }
-         stage("Testing"){
-            steps{
-                echo 'Testing '
-            }
-        }
-         stage("Deploy"){
-            steps{
-                echo 'Deploying'
+                deploy adapters: [tomcat8(credentialsId: 'TomcatCreds', path: '', url: 'http://localhost:8080')], contextPath: null, onFailure: false, war: '**/*.war'
             }
         }
     }
