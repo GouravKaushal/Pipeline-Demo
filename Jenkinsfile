@@ -1,0 +1,25 @@
+pipeline{
+    agent any
+    stages{
+        stage("Check Out"){
+            steps{
+                echo 'Checking Out'
+            }
+        }
+         stage("Compile"){
+            steps{
+                echo 'Compiling'
+            }
+        }
+         stage("Testing"){
+            steps{
+                echo 'Testing '
+            }
+        }
+         stage("Deploy"){
+            steps{
+                echo 'Deploying'
+            }
+        }
+    }
+}
